@@ -1,45 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BlueSearch</title>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-<link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon">
-<style>
-    body {
-        font-family: 'Comfortaa', cursive;
-        background-color: #e0f7fa;
-        color: #333;
-        text-align: center;
-        padding: 50px;
-        margin: 0;
-    }
-    .gcse-search {
-        background-color: #e0f7fa;
-        padding: 20px;
-        border-radius: 10px;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    .powered-by {
-        margin-top: 20px;
-        font-size: 1em;
-        color: #555;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated title to have a default state -->
+    <title>BlueSearch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon">
+    <style>
+        body { font-family: 'Comfortaa', cursive; background-color: #e0f7fa; color: #333; text-align: center; padding: 50px; margin: 0; }
+        .gcse-search { background-color: #e0f7fa; padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto; }
+        .powered-by { margin-top: 20px; font-size: 1em; color: #555; }
+    </style>
 </head>
 <body>
-<h1>BlueSearch</h1>
+    <h1>BlueSearch</h1>
+    
+    <!-- Google CSE script -->
+    <script async src="https://cse.google.com/cse.js?cx=c11c0217f09334387"></script>
+    <div class="gcse-search"></div>
+    
+    <div class="powered-by">
+        Powered by Google and BlueSearch
+    </div>
 
-<!-- Google CSE script -->
-<script async src="https://cse.google.com/cse.js?cx=c11c0217f09334387"></script>
-<div class="gcse-search"></div>
+    <!-- JavaScript to update the tab title -->
+    <script>
+        window.onload = function() {
+            // Function to check for search query and update title
+            function updateTitle() {
+                var searchInput = document.querySelector('input.gsc-input');
+                if (searchInput && searchInput.value) {
+                    document.title = searchInput.value + ' - BlueSearch';
+                }
+            }
 
-<div class="powered-by">
-    Powered by Google and BlueSearch
-</div>
+            // Listen for clicks on the search button
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('.gsc-search-button, .gsc-search-button *')) {
+                    setTimeout(updateTitle, 500); // Small delay to allow input to process
+                }
+            });
 
-
+            // Listen for 'Enter' key in search box
+            document.addEventListener('keypress', function(e) {
+                if (e.target.matches('input.gsc-input') && e.key === 'Enter') {
+                    setTimeout(updateTitle, 500);
+                }
+            });
+        };
+    </script>
 </body>
 </html>
